@@ -1,9 +1,7 @@
-export class InvalidData extends Error {
-  status: number;
+import { AppError } from "./AppError";
 
+export class InvalidData extends AppError {
   constructor(message: string) {
-    super(message);
-    this.name = "InvalidData";
-    this.status = 400;
+    super(message, 400);
   }
 }

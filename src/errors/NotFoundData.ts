@@ -1,9 +1,7 @@
-export class NotFoundData extends Error {
-  status: number;
+import { AppError } from './AppError'
 
+export class NotFoundData extends AppError {
   constructor(message: string) {
-    super(message);
-    this.name = "NotFoundData";
-    this.status = 404;
+    super(message, 404);
   }
 }
