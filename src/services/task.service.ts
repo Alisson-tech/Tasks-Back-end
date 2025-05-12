@@ -3,8 +3,16 @@ import { Task, TaskPayload } from "../models/dtos/task.dto";
 import { InvalidData } from "../errors/InvalidData";
 import { NotFoundData } from "../errors/NotFoundData";
 import { TaskEntity } from "../models/entities/TasksEntity";
+import { paginate } from "../common/pagination/paginate";
 
 const taskRepo = AppDataSource.getRepository(TaskEntity);
+
+export async function findPaginated(page: number, limit: number) {
+  
+  const queryBuilder = taskRepo.createQueryBuilder('task');
+
+  return paginate(queryBuilder, { page, limit });
+}
 
 export const findAll = async () :  Promise<Task[]> => {
   const taskEntityList = await taskRepo.find();
