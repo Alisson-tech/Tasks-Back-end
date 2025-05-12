@@ -1,5 +1,6 @@
 import "reflect-metadata"; 
 import express from "express";
+import cors from 'cors';
 import AppDataSource from "./dataSource";
 import router from "./routes/task.routes";
 import { errorHandler } from "./middlewares/erroHandler";
@@ -8,6 +9,8 @@ const app = express();
 const PORT = process.env.API_PORT;
 
 app.use(express.json());
+
+app.use(cors());
 
 app.use("/api/task", router);
 
