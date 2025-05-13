@@ -77,6 +77,24 @@ export const update = async (id: number, payload: Partial<TaskPayload>): Promise
   } as Task;
 };
 
+export const updateCompleted = async (id: number, completed: boolean): Promise<Task>  => {
+  const task = await taskRepo.findOneBy({ id });
+
+  if (!task) 
+    throw new NotFoundData("Tarefa não encontrada");
+
+  task.completed = completed;
+
+  const taskEntity = await taskRepo.save(task);
+
+  return {
+    id: taskEntity.id,
+    title: taskEntity.title,
+    description: taskEntity.description,
+    completed: taskEntity.completed
+  } as Task;
+};
+
 export const remove = async (id: number)  => {
   const task = await taskRepo.findOneBy({ id });
 

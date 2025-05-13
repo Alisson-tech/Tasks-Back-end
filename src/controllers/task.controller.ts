@@ -52,6 +52,18 @@ export const update = async (req: Request, res: Response, next: NextFunction) : 
   }
 };
 
+export const updateCompleted = async (req: Request, res: Response, next: NextFunction) : Promise<void>  => {
+  try {
+    const id = Number(req.params.id);
+    const completed = req.body.completed;
+
+    const updated = await taskService.updateCompleted(id, completed);
+    res.json(updated);
+  } catch (err) {
+    next(err);
+  }
+};
+
 export const remove = async (req: Request, res: Response, next: NextFunction) : Promise<void>  => {
   try {
     const id = Number(req.params.id);
