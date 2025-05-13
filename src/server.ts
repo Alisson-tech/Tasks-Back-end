@@ -1,5 +1,5 @@
 import "reflect-metadata"; 
-import express from "express";
+import express, { ErrorRequestHandler } from "express";
 import cors from 'cors';
 import AppDataSource from "./dataSource";
 import router from "./routes/task.routes";
@@ -14,7 +14,7 @@ app.use(cors());
 
 app.use("/api/task", router);
 
-app.use(errorHandler);
+app.use(errorHandler as unknown as ErrorRequestHandler);
 
 AppDataSource.initialize()
   .then(() => {
